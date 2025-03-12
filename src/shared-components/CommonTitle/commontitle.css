@@ -1,0 +1,11 @@
+.section-title {
+  font-size: 34px;
+  font-weight: bolder;
+  position: relative;
+}
+
+.title-text {
+  position: absolute;
+  top: 28%;
+  left: 5%;
+}

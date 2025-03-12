@@ -1,0 +1,9 @@
+Button {
+  font-weight: bold !important;
+}
+
+@media (max-width: 480px) {
+  Button {
+    font-size: 12px !important;
+  }
+}
