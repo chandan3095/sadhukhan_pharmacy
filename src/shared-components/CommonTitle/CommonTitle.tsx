@@ -1,6 +1,5 @@
 import { BiPlusMedical } from "react-icons/bi";
 import "./commontitle.css";
-import CustomButton from "../Button/CustomButton";
 
 interface Props {
   title: string;
