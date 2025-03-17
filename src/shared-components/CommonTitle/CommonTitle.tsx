@@ -16,12 +16,7 @@ const CommonTitle: React.FC<Props> = ({
       <h2 className="section-title">
         {withIcon ? (
           <>
-            <BiPlusMedical
-              color={color}
-              size={90}
-              opacity={0.4}
-              className="title-icon"
-            />{" "}
+            <BiPlusMedical color={color} opacity={0.4} className="title-icon" />{" "}
             <span className="title-text">{title}</span>
           </>
         ) : (

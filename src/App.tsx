@@ -1,4 +1,5 @@
-import React from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -20,6 +21,7 @@ const App = () => {
         <Route path="doctors/" element={<Doctors />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
+      <ToastContainer position="top-right" autoClose={3000} />
       <Footer />
     </Router>
   );

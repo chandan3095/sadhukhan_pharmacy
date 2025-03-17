@@ -1,7 +1,7 @@
 import CommonTitle from "../../../shared-components/CommonTitle/CommonTitle";
 import CustomButton from "../../../shared-components/Button/CustomButton";
 import { RiMedicineBottleLine } from "react-icons/ri";
-import data from "./data.js";
+import data from "../../../data/productData.js";
 import SingleProduct from "../../../shared-components/SingleProduct/SingleProduct";
 
 export interface Product {
@@ -22,7 +22,7 @@ const Products = () => {
         </div>
         <div className="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2 d-flex justify-content-end align-items-center">
           <CustomButton
-            title="View All Products"
+            title="View Products"
             variant="light"
             customBgColor="#fff"
             customTextColor="#000"
@@ -32,7 +32,7 @@ const Products = () => {
         </div>
       </div>
 
-      <div className="row pt-5">
+      <div className="row pt-3 pt-md-5">
         {data.map((item: Product) => (
           <div
             className="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 d-flex justify-content-center mb-4"

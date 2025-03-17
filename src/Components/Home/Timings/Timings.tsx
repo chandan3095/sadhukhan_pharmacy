@@ -7,7 +7,7 @@ const Timings = () => {
     <div className="container">
       <CommonTitle title="Timings" withIcon={true} />
 
-      <div className="container py-5">
+      <div className="container py-3 py-md-5">
         <div className="row align-items-center">
           {/* Left Column */}
           <div className="col-12 col-sm-12 col-md-6 col-lg-6 mb-4 mb-md-0">

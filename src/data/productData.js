@@ -1,4 +1,4 @@
-import img1 from "../../../assets/about.png";
+import img1 from "../assets/about.png";
 
 const data = [
   {

@@ -10,16 +10,16 @@ const Home = () => {
       <section>
         <Hero />
       </section>
-      <section className="py-5 ">
+      <section className="py-3 py-md-5">
         <About />
       </section>
-      <section className="py-5 ">
+      <section className="py-3 py-md-5">
         <Schedule />
       </section>
-      <section className="py-5">
+      <section className="py-3 py-md-5">
         <Products />
       </section>
-      <section className="py-5">
+      <section className="py-3 py-md-5">
         <Timings />
       </section>
     </div>

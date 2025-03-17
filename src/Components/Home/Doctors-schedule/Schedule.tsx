@@ -1,18 +1,26 @@
 import CustomButton from "../../../shared-components/Button/CustomButton";
 import CommonTitle from "../../../shared-components/CommonTitle/CommonTitle";
 import { GrSchedule } from "react-icons/gr";
-import Card from "react-bootstrap/Card";
-import { LuSquareUser } from "react-icons/lu";
 import Slider from "react-slick";
+import data from "../../../data/doctorData.js";
+import SingleDoctor from "../../../shared-components/SingleDoctor/SingleDoctor";
 import "./schedule.css";
-import data from "./data.js";
+import { Row } from "react-bootstrap";
 
+export interface Doctor {
+  id: number;
+  title: string;
+  degree: string;
+  fromtime: string;
+  totime: string;
+  days: string;
+}
 const Schedule = () => {
   const settings = {
     className: "center",
     centerMode: true,
-    infinite: true,
     centerPadding: "60px",
+    infinite: true,
     slidesToShow: 3,
     slidesToScroll: 1,
     speed: 8000,
@@ -47,55 +55,55 @@ const Schedule = () => {
           centerPadding: "20px",
         },
       },
+      {
+        breakpoint: 320,
+        settings: {
+          slidesToShow: 1,
+          centerPadding: "10px",
+        },
+      },
     ],
   };
 
   return (
-    <div className="container">
-      <div className="row">
-        <div className="col-6 col-sm-6 col-md-8 col-lg-9 col-xl-10">
-          <CommonTitle title="Doctor’s" withIcon={true} />
+    <section className="schedule-sec">
+      <div className="container">
+        <div className="row">
+          <div className="col-6 col-sm-6 col-md-8 col-lg-9 col-xl-10">
+            <CommonTitle title="Doctor’s" withIcon={true} />
+          </div>
+          <div className="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2 d-flex justify-content-end align-items-center">
+            <CustomButton
+              title="View Schedule"
+              variant="light"
+              customBgColor="#fff"
+              customTextColor="#000"
+              icon={<GrSchedule />}
+              handleClick={() => console.log("Clicked")}
+            />
+          </div>
         </div>
-        <div className="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2 d-flex justify-content-end align-items-center">
-          <CustomButton
-            title="View Schedule"
-            variant="light"
-            customBgColor="#fff"
-            customTextColor="#000"
-            icon={<GrSchedule />}
-            handleClick={() => console.log("Clicked")}
-          />
-        </div>
-      </div>
 
-      <div className="slider-container pt-5">
-        <Slider {...settings}>
-          {data.map((item: any) => (
-            <div className="d-flex" key={item.id}>
-              <Card className="doctor-card">
-                <Card.Body className="d-flex flex-column justify-content-center align-items-center gap-3">
-                  <LuSquareUser size={60} color="#38cb82" opacity={0.8} />
-                  <Card.Title className="text-green-700">
-                    {item.title}
-                  </Card.Title>
-                  <Card.Subtitle className="mb-2 text-muted">
-                    {item.degree}
-                  </Card.Subtitle>
-                  <div>
-                    <Card.Text className="m-0 text-center text-muted">
-                      {item.fromtime} to {item.totime}
-                    </Card.Text>
-                    <Card.Text className="m-0 text-center text-muted">
-                      {item.days}
-                    </Card.Text>
-                  </div>
-                </Card.Body>
-              </Card>
-            </div>
-          ))}
-        </Slider>
+        <Row>
+          <div className="slider-container pt-3 pt-md-5">
+            <Slider {...settings}>
+              {data.map((item: Doctor) => (
+                <div className="" key={item.id}>
+                  <SingleDoctor
+                    id={item.id}
+                    title={item.title}
+                    days={item.days}
+                    degree={item.degree}
+                    fromtime={item.fromtime}
+                    totime={item.totime}
+                  />
+                </div>
+              ))}
+            </Slider>
+          </div>
+        </Row>
       </div>
-    </div>
+    </section>
   );
 };
 

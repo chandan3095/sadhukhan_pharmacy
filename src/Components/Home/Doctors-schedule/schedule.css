@@ -1,15 +1,8 @@
-.doctor-card {
-  width: 18rem;
-  background-color: #ffffff83;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-radius: 12px;
-  padding: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border: none;
+.schedule-sec .slider-container {
+  max-width: 100%;
+  overflow: hidden;
 }
 
-.doctor-card .card-subtitle {
-  opacity: 0.65;
-  text-align: center;
+.schedule-sec .slick-slide {
+  box-sizing: border-box;
 }
