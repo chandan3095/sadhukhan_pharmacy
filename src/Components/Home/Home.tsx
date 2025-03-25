@@ -1,6 +1,7 @@
 import About from "./About/About";
 import Schedule from "./Doctors-schedule/Schedule";
 import Hero from "./Hero/Hero";
+import Notice from "./Notice/Notice";
 import Products from "./Productssec/Products";
 import Timings from "./Timings/Timings";
 
@@ -10,6 +11,9 @@ const Home = () => {
       <section>
         <Hero />
       </section>
+      <div>
+        <Notice />
+      </div>
       <section className="py-3 py-md-5">
         <About />
       </section>

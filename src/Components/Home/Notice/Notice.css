@@ -1,0 +1,92 @@
+.notice-container {
+  overflow: hidden;
+  padding: 8px 0;
+  width: 100%;
+  height: 40px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.notice-track {
+  display: flex;
+  gap: 40px;
+  animation: slide 20s linear infinite; /* Slower speed for large screens */
+  width: max-content;
+}
+
+.notice-slider {
+  display: flex;
+  align-items: center;
+}
+
+.notice-text {
+  font-size: 16px;
+  color: #fff;
+  padding: 0 20px;
+  white-space: nowrap;
+}
+
+/* Medium screens */
+@media (max-width: 768px) {
+  .notice-container {
+    height: 32px;
+  }
+
+  .notice-text {
+    font-size: 14px;
+    padding: 0 12px;
+  }
+
+  .notice-track {
+    gap: 20px;
+    animation: slide-md 25s linear infinite; /* Slower for md screens */
+  }
+}
+
+/* Small screens */
+@media (max-width: 480px) {
+  .notice-container {
+    height: 28px;
+  }
+
+  .notice-text {
+    font-size: 12px;
+    padding: 0 8px;
+  }
+
+  .notice-track {
+    gap: 12px;
+    animation: slide-sm 30s linear infinite; /* Even slower for sm screens */
+  }
+}
+
+/* Large screens animation */
+@keyframes slide {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-50% - 20px));
+  }
+}
+
+/* Medium screens animation */
+@keyframes slide-md {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-50% - 20px));
+  }
+}
+
+/* Small screens animation */
+@keyframes slide-sm {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-50% - 12px));
+  }
+}
