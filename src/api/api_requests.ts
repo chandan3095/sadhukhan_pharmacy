@@ -18,6 +18,15 @@ export const apiRequests = {
     return response.data.data;
   },
 
+  getVisitingDaysByDay: async (
+    day: string
+  ): Promise<{ data: DoctorVisitingDays[] }> => {
+    const response = await axiosInstance.get(
+      `/doctor-visiting-days/?day=${day}`
+    );
+    return response.data;
+  },
+
   getAllNotices: async (): Promise<{ data: Notice[] }> => {
     const response = await axiosInstance.get(`/notice`);
     return response.data;

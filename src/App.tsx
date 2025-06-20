@@ -18,7 +18,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<Products />} />
-        <Route path="doctors/" element={<Doctors />} />
+        <Route path="/doctors" element={<Doctors />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
       <ToastContainer position="top-right" autoClose={3000} />

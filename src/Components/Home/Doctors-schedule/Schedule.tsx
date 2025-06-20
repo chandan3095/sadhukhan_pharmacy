@@ -7,6 +7,7 @@ import "./schedule.css";
 import { Row } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { apiRequests } from "../../../api/api_requests";
+import { useNavigate } from "react-router-dom";
 
 const Schedule = () => {
   const settings = {
@@ -57,6 +58,7 @@ const Schedule = () => {
       },
     ],
   };
+  const navigate = useNavigate();
   const [doctors, setDoctors] = useState<any[]>([]);
 
   useEffect(() => {
@@ -118,7 +120,7 @@ const Schedule = () => {
               customBgColor="#fff"
               customTextColor="#000"
               icon={<GrSchedule />}
-              handleClick={() => console.log("Clicked")}
+              handleClick={() => navigate("/doctors")}
             />
           </div>
         </div>

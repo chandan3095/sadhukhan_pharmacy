@@ -2,6 +2,8 @@ import Slider, { Settings } from "react-slick";
 import "./hero.css";
 // import CustomButton from "../../../shared-components/Button/CustomButton";
 // import { GiMedicines } from "react-icons/gi";
+import img1 from "../../../assets/hero.png";
+import img2 from "../../../assets/hero2.jpeg";
 import { BiSolidOffer } from "react-icons/bi";
 import { useEffect, useState } from "react";
 import { apiRequests } from "../../../api/api_requests";
@@ -48,31 +50,46 @@ const Hero = () => {
     <section className="hero-sec">
       <div className="slider-container">
         <Slider {...settings}>
-          {offers.map((item) => (
-            <div className="slide-item" key={item.id}>
-              <div className="image-overlay"></div>
-              <img src={item.image_url} alt="Offer 1" className="slide-image" />
-              <div className="offer-detail">
-                <h1 className="text-green-800 d-flex align-items-center gap-2">
-                  <BiSolidOffer color="white" /> Offers
-                </h1>
-                <div className="py-3 py-md-1">
-                  <h3 className="text-green-700 title">{item.title}</h3>
-                  <p className="text-white sub-title px-0">
-                    {item.description}
-                  </p>
-                </div>
-                {/* <div>
-                  <CustomButton
-                    title="Get Details"
-                    variant="light"
-                    icon={<GiMedicines className="text-green-700" size={25} />}
-                    handleClick={handleClick}
+          {offers.length > 0
+            ? offers.map((item) => (
+                <div className="slide-item" key={item.id}>
+                  <div className="image-overlay"></div>
+                  <img
+                    src={item.image_url}
+                    alt="Offer"
+                    className="slide-image"
                   />
-                </div> */}
-              </div>
-            </div>
-          ))}
+                  <div className="offer-detail">
+                    <h1 className="text-green-800 d-flex align-items-center gap-2">
+                      <BiSolidOffer color="white" /> Offers
+                    </h1>
+                    <div className="py-3 py-md-1">
+                      <h3 className="text-green-700 title">{item.title}</h3>
+                      <p className="text-white sub-title px-0">
+                        {item.description}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))
+            : [img1, img2].map((img, index) => (
+                <div className="slide-item" key={index}>
+                  <div className="image-overlay"></div>
+                  <img
+                    src={img}
+                    alt={`Fallback ${index + 1}`}
+                    className="slide-image"
+                  />
+                  <div className="offer-detail">
+                    <h1 className="text-green-800 d-flex align-items-center gap-2">
+                      <BiSolidOffer color="white" /> Welcome
+                    </h1>
+                    <p className="text-white sub-title px-0">
+                      Explore our store
+                    </p>
+                  </div>
+                </div>
+              ))}
         </Slider>
       </div>
     </section>

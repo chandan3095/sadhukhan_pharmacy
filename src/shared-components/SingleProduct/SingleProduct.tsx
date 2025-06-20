@@ -11,8 +11,8 @@ const SingleProduct: React.FC<Product> = ({
   title,
 }) => {
   return (
-    <Card key={id} className="border-0 shadow">
-      <Card.Img variant="top" src={img} />
+    <Card key={id} className="border-0 shadow equal-height-card">
+      <Card.Img variant="top" src={img} className="card-img-top" />
       <Card.Body>
         <Card.Title className="text-green-800 card-title">{title}</Card.Title>
         <Card.Text className="text-secondary section-text">{desc}</Card.Text>

@@ -52,11 +52,12 @@ const SingleDoctor: React.FC<SingleDoctorProps> = ({
             {specialist}
           </Card.Text>
           <div className="schedule-list text-center">
-            {schedules.map((slot, index) => (
-              <Card.Text key={index} className="m-0 text-muted">
-                {slot.day}: {slot.fromtime} - {slot.totime}
-              </Card.Text>
-            ))}
+            {Array.isArray(schedules) &&
+              schedules.map((slot, index) => (
+                <Card.Text key={index} className="m-0 text-muted">
+                  {slot.day}: {slot.fromtime} - {slot.totime}
+                </Card.Text>
+              ))}
           </div>
         </Card.Body>
       </Card>

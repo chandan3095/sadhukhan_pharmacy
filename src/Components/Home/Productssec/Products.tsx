@@ -1,8 +1,10 @@
 import CommonTitle from "../../../shared-components/CommonTitle/CommonTitle";
 import CustomButton from "../../../shared-components/Button/CustomButton";
 import { RiMedicineBottleLine } from "react-icons/ri";
-import data from "../../../data/productData.js";
 import SingleProduct from "../../../shared-components/SingleProduct/SingleProduct";
+import { useEffect, useState } from "react";
+import { apiRequests } from "../../../api/api_requests";
+import { useNavigate } from "react-router-dom";
 
 export interface Product {
   id: number;
@@ -14,6 +16,28 @@ export interface Product {
 }
 
 const Products = () => {
+  const navigate = useNavigate();
+  const [products, setProducts] = useState<any[]>([]);
+
+  useEffect(() => {
+    const fetchProductsData = async () => {
+      const response = await apiRequests.getAllProducts();
+
+      const transformedData: Product[] = response.map((item: any) => ({
+        id: item.id,
+        title: item.name,
+        desc: item.description,
+        img: item.image_url,
+        basePrice: parseFloat(item.mrp_price),
+        currentPrice: parseFloat(item.price),
+      }));
+
+      setProducts(transformedData);
+    };
+
+    fetchProductsData();
+  }, []);
+
   return (
     <div className="container">
       <div className="row">
@@ -27,13 +51,13 @@ const Products = () => {
             customBgColor="#fff"
             customTextColor="#000"
             icon={<RiMedicineBottleLine size={18} />}
-            handleClick={() => console.log("Clicked")}
+            handleClick={() => navigate("/products")}
           />
         </div>
       </div>
 
       <div className="row pt-3 pt-md-5">
-        {data.map((item: Product) => (
+        {products.map((item: Product) => (
           <div
             className="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 d-flex justify-content-center mb-4"
             key={item.id}

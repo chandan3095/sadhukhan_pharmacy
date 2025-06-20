@@ -3,6 +3,7 @@ import { MdAlternateEmail } from "react-icons/md";
 import { IoIosSend } from "react-icons/io";
 import { FaWhatsapp, FaProductHunt, FaPhoneAlt } from "react-icons/fa";
 import logo from "../../assets/logo.png";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -11,7 +12,9 @@ const Footer = () => {
         <div className="row py-3 py-md-5">
           <div className="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 mb-4 mb-md-0">
             <h3 className="page-title">
-              <img src={logo} alt="logo" className="logo" />
+              <Link to="/">
+                <img src={logo} alt="logo" className="logo" />
+              </Link>
             </h3>
 
             <div className="d-flex flex-column gap-3 pt-2 pt-md-4">
@@ -31,14 +34,32 @@ const Footer = () => {
             <h3 className="page-title text-blue-700">Links</h3>
 
             <ul className="list-unstyled d-flex flex-column gap-3 pt-2 pt-md-4 text-white">
-              <li className="d-flex align-items-center gap-2 footer-text text-green-700">
-                <FaUserDoctor style={{ color: "#fbb02e" }} /> Doctor
+              <li className="d-flex align-items-center gap-2 footer-text">
+                <Link
+                  to="/doctors"
+                  style={{ textDecoration: "none" }}
+                  className="text-green-700"
+                >
+                  <FaUserDoctor style={{ color: "#fbb02e" }} /> Doctor
+                </Link>
+              </li>
+              <li className="d-flex align-items-center gap-2 footer-text">
+                <Link
+                  to="/products"
+                  style={{ textDecoration: "none" }}
+                  className="text-green-700"
+                >
+                  <FaProductHunt style={{ color: "#fbb02e" }} /> Product
+                </Link>
               </li>
               <li className="d-flex align-items-center gap-2 footer-text text-green-700">
-                <FaProductHunt style={{ color: "#fbb02e" }} /> Product
-              </li>
-              <li className="d-flex align-items-center gap-2 footer-text text-green-700">
-                <IoIosSend style={{ color: "#fbb02e" }} /> Send Query
+                <Link
+                  to="/contact"
+                  style={{ textDecoration: "none" }}
+                  className="text-green-700"
+                >
+                  <IoIosSend style={{ color: "#fbb02e" }} /> Send Query
+                </Link>
               </li>
             </ul>
           </div>
