@@ -4,6 +4,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { Link, useLocation } from "react-router-dom";
+import logo from "../../assets/logo.png";
 import "./header.css";
 
 const Header = () => {
@@ -14,10 +15,10 @@ const Header = () => {
   const handleShow = () => setShow(true);
   return (
     <nav>
-      <Navbar key="md" expand="md" className="bg-green-700 text-white">
+      <Navbar key="md" expand="md" className="bg-white text-white">
         <Container>
           <Navbar.Brand as={Link} to="/">
-            Logo
+            <img src={logo} alt="logo" className="logo" />
           </Navbar.Brand>
           <Navbar.Toggle
             aria-controls="offcanvasNavbar-expand-md"
@@ -29,7 +30,7 @@ const Header = () => {
             placement="end"
             show={show}
             onHide={handleClose}
-            className="bg-green-700"
+            className="bg-white"
           >
             <Offcanvas.Header closeButton onClick={handleClose} />
             <Offcanvas.Body>

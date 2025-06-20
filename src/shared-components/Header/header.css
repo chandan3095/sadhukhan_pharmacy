@@ -1,8 +1,14 @@
 /* @import "../../index.css"; */
 
 .active-link {
-  border-bottom: 2px solid #fff !important;
+  border-bottom: 2px solid greenyellow !important;
   font-weight: bold !important;
-  color: white !important;
+  color: #00bf63 !important;
   padding-bottom: 0 !important;
+}
+
+.logo {
+  width: 100%;
+  max-width: 150px;
+  height: auto;
 }

@@ -7,9 +7,26 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   border: none;
   margin: 0 1rem;
+  min-height: 360px;
 }
 
 .doctor-card .card-subtitle {
   opacity: 0.65;
   text-align: center;
+}
+
+.schedule-list {
+  max-height: 80px; /* Adjust depending on design */
+  overflow: auto;
+  scrollbar-width: thin; /* For Firefox */
+}
+
+/* Optional scrollbar styling for WebKit browsers */
+.schedule-list::-webkit-scrollbar {
+  height: 4px;
+  width: 4px;
+}
+.schedule-list::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
 }

@@ -107,6 +107,10 @@ textarea::placeholder {
   color: #198450;
 }
 
+.text-blue-700 {
+  color: #107393;
+}
+
 .bg-image {
   background: url(./assets/bg.png);
   background-repeat: no-repeat;

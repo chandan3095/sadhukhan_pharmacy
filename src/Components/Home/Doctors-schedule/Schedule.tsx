@@ -2,19 +2,12 @@ import CustomButton from "../../../shared-components/Button/CustomButton";
 import CommonTitle from "../../../shared-components/CommonTitle/CommonTitle";
 import { GrSchedule } from "react-icons/gr";
 import Slider from "react-slick";
-import data from "../../../data/doctorData.js";
 import SingleDoctor from "../../../shared-components/SingleDoctor/SingleDoctor";
 import "./schedule.css";
 import { Row } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import { apiRequests } from "../../../api/api_requests";
 
-export interface Doctor {
-  id: number;
-  title: string;
-  degree: string;
-  fromtime: string;
-  totime: string;
-  days: string;
-}
 const Schedule = () => {
   const settings = {
     className: "center",
@@ -64,6 +57,52 @@ const Schedule = () => {
       },
     ],
   };
+  const [doctors, setDoctors] = useState<any[]>([]);
+
+  useEffect(() => {
+    const fetchDoctors = async () => {
+      const visitingDays = await apiRequests.getAllVisitingDays();
+
+      const groupedDoctors: { [doctorId: number]: any } = {};
+
+      visitingDays.forEach((visit: any) => {
+        const doctorId = visit.doctor.id;
+
+        if (!groupedDoctors[doctorId]) {
+          groupedDoctors[doctorId] = {
+            id: doctorId,
+            name: visit.doctor.name,
+            degree: visit.doctor.degree,
+            specialist: visit.doctor.specialist,
+            profile_picture_url: visit.doctor.profile_picture_url,
+            schedules: [],
+          };
+        }
+
+        groupedDoctors[doctorId].schedules.push({
+          day: visit.day,
+          fromtime: formatTime(visit.start_time),
+          totime: formatTime(visit.end_time),
+        });
+      });
+
+      setDoctors(Object.values(groupedDoctors));
+    };
+
+    fetchDoctors();
+  }, []);
+
+  const formatTime = (time: string) => {
+    const [hours, minutes] = time.split(":");
+    const date = new Date();
+    date.setHours(+hours);
+    date.setMinutes(+minutes);
+    return date.toLocaleTimeString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    });
+  };
 
   return (
     <section className="schedule-sec">
@@ -87,15 +126,15 @@ const Schedule = () => {
         <Row>
           <div className="slider-container pt-3 pt-md-5">
             <Slider {...settings}>
-              {data.map((item: Doctor) => (
-                <div className="" key={item.id}>
+              {doctors.map((doctor: any) => (
+                <div className="" key={doctor.id}>
                   <SingleDoctor
-                    id={item.id}
-                    title={item.title}
-                    days={item.days}
-                    degree={item.degree}
-                    fromtime={item.fromtime}
-                    totime={item.totime}
+                    id={doctor.id}
+                    title={doctor.name}
+                    degree={doctor.degree}
+                    specialist={doctor.specialist}
+                    image={doctor.profile_picture_url}
+                    schedules={doctor.schedules}
                   />
                 </div>
               ))}

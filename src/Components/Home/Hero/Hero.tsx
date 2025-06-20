@@ -1,10 +1,10 @@
 import Slider, { Settings } from "react-slick";
-import img1 from "../../../assets/hero.png";
-import img2 from "../../../assets/hero2.jpeg";
 import "./hero.css";
-import CustomButton from "../../../shared-components/Button/CustomButton";
-import { GiMedicines } from "react-icons/gi";
+// import CustomButton from "../../../shared-components/Button/CustomButton";
+// import { GiMedicines } from "react-icons/gi";
 import { BiSolidOffer } from "react-icons/bi";
+import { useEffect, useState } from "react";
+import { apiRequests } from "../../../api/api_requests";
 
 const Hero = () => {
   const settings: Settings = {
@@ -33,55 +33,43 @@ const Hero = () => {
     ],
   };
 
-  const data = [
-    {
-      id: 1,
-      img: img1,
-      title: "Antibiotics 10% OFF",
-      subTitle:
-        "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
-    },
-    {
-      id: 2,
-      img: img2,
-      title: "Capsule 25% OFF",
-      subTitle:
-        "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
-    },
-    {
-      id: 3,
-      img: img1,
-      title: "Pediasure 17% OFF",
-      subTitle:
-        "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
-    },
-  ];
+  const [offers, setOffers] = useState<any[]>([]);
 
-  const handleClick = () => {};
+  useEffect(() => {
+    const fetchAllOffers = async () => {
+      const offerData = await apiRequests.getAllOffers();
+      setOffers(offerData.data);
+    };
+
+    fetchAllOffers();
+  }, []);
+
   return (
     <section className="hero-sec">
       <div className="slider-container">
         <Slider {...settings}>
-          {data.map((item) => (
+          {offers.map((item) => (
             <div className="slide-item" key={item.id}>
               <div className="image-overlay"></div>
-              <img src={item.img} alt="Offer 1" className="slide-image" />
+              <img src={item.image_url} alt="Offer 1" className="slide-image" />
               <div className="offer-detail">
                 <h1 className="text-green-800 d-flex align-items-center gap-2">
                   <BiSolidOffer color="white" /> Offers
                 </h1>
                 <div className="py-3 py-md-1">
                   <h3 className="text-green-700 title">{item.title}</h3>
-                  <p className="text-white sub-title px-0">{item.subTitle}</p>
+                  <p className="text-white sub-title px-0">
+                    {item.description}
+                  </p>
                 </div>
-                <div>
+                {/* <div>
                   <CustomButton
                     title="Get Details"
                     variant="light"
                     icon={<GiMedicines className="text-green-700" size={25} />}
                     handleClick={handleClick}
                   />
-                </div>
+                </div> */}
               </div>
             </div>
           ))}
