@@ -1,1 +1,7 @@
-
+.about-section-text {
+  overflow: visible !important;
+  white-space: normal !important;
+  text-overflow: unset !important;
+  word-break: break-word;
+  line-height: 1.7;
+}

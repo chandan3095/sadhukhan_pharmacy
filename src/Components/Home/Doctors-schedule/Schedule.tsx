@@ -127,20 +127,39 @@ const Schedule = () => {
 
         <Row>
           <div className="slider-container pt-3 pt-md-5">
-            <Slider {...settings}>
-              {doctors.map((doctor: any) => (
-                <div className="" key={doctor.id}>
-                  <SingleDoctor
-                    id={doctor.id}
-                    title={doctor.name}
-                    degree={doctor.degree}
-                    specialist={doctor.specialist}
-                    image={doctor.profile_picture_url}
-                    schedules={doctor.schedules}
-                  />
-                </div>
-              ))}
-            </Slider>
+            {doctors.length === 1 ? (
+              <div className="d-flex justify-content-center">
+                <SingleDoctor
+                  id={doctors[0].id}
+                  title={doctors[0].name}
+                  degree={doctors[0].degree}
+                  specialist={doctors[0].specialist}
+                  image={doctors[0].profile_picture_url}
+                  schedules={doctors[0].schedules}
+                />
+              </div>
+            ) : (
+              <Slider
+                {...{
+                  ...settings,
+                  slidesToShow: Math.min(doctors.length, 3),
+                  centerMode: doctors.length > 1,
+                }}
+              >
+                {doctors.map((doctor: any) => (
+                  <div key={doctor.id}>
+                    <SingleDoctor
+                      id={doctor.id}
+                      title={doctor.name}
+                      degree={doctor.degree}
+                      specialist={doctor.specialist}
+                      image={doctor.profile_picture_url}
+                      schedules={doctor.schedules}
+                    />
+                  </div>
+                ))}
+              </Slider>
+            )}
           </div>
         </Row>
       </div>

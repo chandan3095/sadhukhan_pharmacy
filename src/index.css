@@ -137,6 +137,10 @@ textarea::placeholder {
     font-size: 16px;
   }
 
+  .about-section-text {
+    font-size: 16px;
+  }
+
   .footer-text {
     font-size: 16px !important;
   }
@@ -155,6 +159,10 @@ textarea::placeholder {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
+    font-size: 12px;
+  }
+
+  .about-section-text {
     font-size: 12px;
   }
 

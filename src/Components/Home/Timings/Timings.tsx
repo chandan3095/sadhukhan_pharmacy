@@ -18,7 +18,7 @@ const Timings = () => {
                 <p className="card-text">Opens All Weekdays except Tuesday</p>
                 <p className="card-text d-flex align-items-center">
                   <RiTimerLine className="me-2" />
-                  08:00 AM - 09:30PM
+                  08:30 AM - 10:00 PM
                 </p>
 
                 {/* Facebook Link Section */}

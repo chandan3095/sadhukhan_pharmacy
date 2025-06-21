@@ -68,10 +68,11 @@ const Footer = () => {
 
             <ul className="list-unstyled d-flex flex-column gap-3 pt-2 pt-md-4 text-white">
               <li className="d-flex align-items-center gap-2 footer-text text-green-700">
-                <FaPhoneAlt style={{ color: "#fbb02e" }} /> 7866065406
+                <FaPhoneAlt style={{ color: "#fbb02e" }} /> 7866065406 /
+                8350089864
               </li>
               <li className="d-flex align-items-center gap-2 footer-text text-green-700">
-                <FaWhatsapp style={{ color: "#fbb02e" }} /> 7866065406
+                <FaWhatsapp style={{ color: "#fbb02e" }} /> 8350089864
               </li>
             </ul>
           </div>

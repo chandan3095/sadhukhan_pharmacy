@@ -1,8 +1,30 @@
-.schedule-sec .slider-container {
+/* .schedule-sec .slider-container {
   max-width: 100%;
   overflow: hidden;
 }
 
 .schedule-sec .slick-slide {
+  box-sizing: border-box;
+} */
+
+/* schedule.css */
+.schedule-sec .slider-container {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.schedule-sec .slick-slider {
+  display: block;
+}
+
+.schedule-sec .slick-track {
+  display: flex !important;
+}
+
+.schedule-sec .slick-slide {
+  float: none;
+  display: block;
+  height: auto;
   box-sizing: border-box;
 }
