@@ -57,7 +57,7 @@ const Products = () => {
       </div>
 
       <div className="row pt-3 pt-md-5">
-        {products.map((item: Product) => (
+        {products.slice(0, 6).map((item: Product) => (
           <div
             className="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 d-flex justify-content-center mb-4"
             key={item.id}

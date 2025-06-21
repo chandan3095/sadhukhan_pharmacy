@@ -26,7 +26,7 @@ const Footer = () => {
 
               <h6 className="text-green-700 d-flex gap-2 fs-sm footer-text">
                 <MdAlternateEmail size={20} style={{ color: "#fbb02e" }} />
-                sadhukhan.pharmacy@gmail.com
+                sadhukhanpharmacy.med@gmail.com
               </h6>
             </div>
           </div>

@@ -11,6 +11,8 @@ const Contact = () => {
     message: "",
   });
 
+  const [loading, setLoading] = useState(false); // ✅ loading state
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -20,26 +22,29 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    const response = await axios.post(
-      "https://formspree.io/f/xwplpbor",
-      formData
-    );
+    setLoading(true); // ✅ show loading
 
     try {
+      const response = await axios.post(
+        "https://formspree.io/f/xwplpbor",
+        formData
+      );
+
       if (response.status === 200) {
         toast.success("Message sent successfully!");
+        setFormData({
+          name: "",
+          contact: "",
+          message: "",
+        });
       }
-
-      setFormData({
-        name: "",
-        contact: "",
-        message: "",
-      });
     } catch (err) {
       toast.error("Failed to send message. Please try again.");
+    } finally {
+      setLoading(false); // ✅ hide loading
     }
   };
+
   return (
     <section className="bg-image">
       <div className="container">
@@ -54,7 +59,7 @@ const Contact = () => {
 
         <div className="fs-5 pt-3">
           <p className="footer-text">
-            <IoMailOutline /> Example@info.com
+            <IoMailOutline /> sadhukhanpharmacy.med@gmail.com
           </p>
           <p className="footer-text">
             <IoCallOutline /> 7866065406
@@ -128,8 +133,9 @@ const Contact = () => {
                 <button
                   type="submit"
                   className="btn bg-green-700 text-white w-75"
+                  disabled={loading}
                 >
-                  Submit
+                  {loading ? "Sending..." : "Submit"}
                 </button>
               </div>
             </form>

@@ -82,10 +82,15 @@ const Hero = () => {
                   />
                   <div className="offer-detail">
                     <h1 className="text-green-800 d-flex align-items-center gap-2">
-                      <BiSolidOffer color="white" /> Welcome
+                      Welcome To Sadhukhan Pharmacy
                     </h1>
-                    <p className="text-white sub-title px-0">
-                      Explore our store
+                    <p className="text-white sub-title px-0 pt-3 leading-relaxed">
+                      আপনার সকল স্বাস্থ্যসেবা চাহিদা পূরণের জন্য আপনার বিশ্বস্ত
+                      গন্তব্য,{" "}
+                      <span style={{ color: "#fbb02e", fontWeight: "bold" }}>
+                        সাধুখান ফার্মেসিতে{" "}
+                      </span>
+                      আপনাকে স্বাগতম।
                     </p>
                   </div>
                 </div>

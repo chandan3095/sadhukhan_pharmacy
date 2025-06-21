@@ -136,7 +136,9 @@ const Doctors = () => {
                 style={{ maxWidth: "300px", width: "100%" }}
                 className="img-fluid"
               />
-              <h5 className="mt-3">No Doctors Found</h5>
+              <h5 className="mt-3" style={{ color: "red" }}>
+                No Doctors Found!
+              </h5>
             </div>
           )}
         </div>

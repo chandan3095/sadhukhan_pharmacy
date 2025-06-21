@@ -25,12 +25,12 @@ const Timings = () => {
                 <div className="mt-4">
                   <h3 className="card-title mb-3">Facebook Link</h3>
                   <a
-                    href="#"
+                    href="/"
                     className="text-decoration-none text-primary"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    https://www.facebook.com/sadhukhan-pharmacy
+                    Facebook Page will Be Available Soon..
                   </a>
                 </div>
               </div>

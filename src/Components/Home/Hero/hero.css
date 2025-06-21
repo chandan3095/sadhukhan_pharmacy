@@ -49,9 +49,11 @@
 }
 
 .sub-title {
-  display: flex;
-  flex-wrap: wrap;
+  display: block;
   width: 50%;
+  line-height: 1.7;
+  word-break: break-word;
+  white-space: normal;
 }
 
 .slick-arrow {
@@ -173,8 +175,6 @@
   }
 
   .sub-title {
-    display: flex;
-    flex-wrap: wrap;
     width: 100%;
     font-size: 16px;
   }
@@ -204,8 +204,6 @@
   }
 
   .sub-title {
-    display: flex;
-    flex-wrap: wrap;
     width: 100%;
     font-size: 12px;
   }

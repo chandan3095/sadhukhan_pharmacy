@@ -23,39 +23,55 @@ const Notice: React.FC = () => {
     getNoticesData();
   }, []);
 
+  const renderNoticeContent = (notice: any, index: number) => (
+    <div key={`${notice.title}-${index}`} className="notice-slider">
+      <span className="notice-text d-flex align-items-center gap-2 text-white">
+        <MdOutlineNotificationsActive color="yellow" />
+        <span>
+          <strong>{notice.title}</strong>
+          {notice.description && (
+            <>
+              : <span className="font-normal">{notice.description}</span>
+            </>
+          )}
+        </span>
+      </span>
+    </div>
+  );
+
   return (
-    <div className="notice-container bg-green-700">
+    <div className="notice-container">
       <div className="notice-track">
         {isLoading ? (
-          <div className="notice-slider">
-            <span className="notice-text d-flex align-items-center gap-2 text-white">
-              Loading notices...
-            </span>
-          </div>
-        ) : notices.length > 0 ? (
-          [...notices, ...notices].map((notice, index) => (
-            <div key={`${notice.title}-${index}`} className="notice-slider">
+          <>
+            <div className="notice-slider">
               <span className="notice-text d-flex align-items-center gap-2 text-white">
-                <MdOutlineNotificationsActive color="yellow" />
-                <span>
-                  <strong>{notice.title}</strong>
-                  {notice.description ? (
-                    <>
-                      :{" "}
-                      <span className="font-normal">{notice.description}</span>
-                    </>
-                  ) : null}
-                </span>
+                Loading notices...
               </span>
             </div>
-          ))
+            <div className="notice-slider">
+              <span className="notice-text d-flex align-items-center gap-2 text-white">
+                Loading notices...
+              </span>
+            </div>
+          </>
+        ) : notices.length > 0 ? (
+          [...notices, ...notices].map(renderNoticeContent)
         ) : (
-          <div className="notice-slider">
-            <span className="notice-text d-flex align-items-center gap-2 text-white">
-              <MdOutlineNotificationsActive color="yellow" />
-              No notices available now.
-            </span>
-          </div>
+          <>
+            <div className="notice-slider">
+              <span className="notice-text d-flex align-items-center gap-2 text-white">
+                <MdOutlineNotificationsActive color="yellow" />
+                No notices available now.
+              </span>
+            </div>
+            <div className="notice-slider">
+              <span className="notice-text d-flex align-items-center gap-2 text-white">
+                <MdOutlineNotificationsActive color="yellow" />
+                No notices available now.
+              </span>
+            </div>
+          </>
         )}
       </div>
     </div>

@@ -1,23 +1,23 @@
 .notice-container {
   overflow: hidden;
-  padding: 8px 0;
-  width: 100%;
-  height: 40px;
   position: relative;
+  height: 40px;
+  background-color: #047857; /* bg-green-700 */
   display: flex;
   align-items: center;
 }
 
 .notice-track {
   display: flex;
-  gap: 40px;
-  animation: slide 20s linear infinite; /* Slower speed for large screens */
-  width: max-content;
+  width: fit-content;
+  animation: scroll 20s linear infinite;
 }
 
 .notice-slider {
   display: flex;
   align-items: center;
+  white-space: nowrap;
+  padding-right: 40px;
 }
 
 .notice-text {
@@ -25,6 +25,15 @@
   color: #fff;
   padding: 0 20px;
   white-space: nowrap;
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
 }
 
 /* Medium screens */
@@ -38,9 +47,12 @@
     padding: 0 12px;
   }
 
+  .notice-slider {
+    padding-right: 20px;
+  }
+
   .notice-track {
-    gap: 20px;
-    animation: slide-md 25s linear infinite; /* Slower for md screens */
+    animation-duration: 25s;
   }
 }
 
@@ -55,38 +67,11 @@
     padding: 0 8px;
   }
 
+  .notice-slider {
+    padding-right: 12px;
+  }
+
   .notice-track {
-    gap: 12px;
-    animation: slide-sm 30s linear infinite; /* Even slower for sm screens */
-  }
-}
-
-/* Large screens animation */
-@keyframes slide {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(calc(-50% - 20px));
-  }
-}
-
-/* Medium screens animation */
-@keyframes slide-md {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(calc(-50% - 20px));
-  }
-}
-
-/* Small screens animation */
-@keyframes slide-sm {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(calc(-50% - 12px));
+    animation-duration: 30s;
   }
 }
