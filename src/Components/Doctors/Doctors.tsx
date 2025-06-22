@@ -26,10 +26,13 @@ const Doctors = () => {
 
   const fetchDoctors = async () => {
     const visitingDays = await apiRequests.getAllVisitingDays();
+    groupDoctors(visitingDays);
+  };
 
+  const groupDoctors = (data: any[]) => {
     const groupedDoctors: { [doctorId: number]: any } = {};
 
-    visitingDays.forEach((visit: any) => {
+    data.forEach((visit: any) => {
       const doctorId = visit.doctor.id;
 
       if (!groupedDoctors[doctorId]) {
@@ -66,37 +69,18 @@ const Doctors = () => {
   };
 
   const handleDropdownChange = async (value: string | null) => {
+    const visitingDays = await apiRequests.getAllVisitingDays();
+
     if (!value || value === "all") {
-      fetchDoctors();
+      groupDoctors(visitingDays);
       return;
     }
 
-    const filteredData = await apiRequests.getVisitingDaysByDay(value);
+    const filtered = visitingDays.filter(
+      (visit: any) => visit.day.toLowerCase() === value.toLowerCase()
+    );
 
-    const groupedDoctors: { [doctorId: number]: any } = {};
-
-    filteredData.data.forEach((visit: any) => {
-      const doctorId = visit.doctor.id;
-
-      if (!groupedDoctors[doctorId]) {
-        groupedDoctors[doctorId] = {
-          id: doctorId,
-          name: visit.doctor.name,
-          degree: visit.doctor.degree,
-          specialist: visit.doctor.specialist,
-          profile_picture_url: visit.doctor.profile_picture_url,
-          schedules: [],
-        };
-      }
-
-      groupedDoctors[doctorId].schedules.push({
-        day: visit.day,
-        fromtime: formatTime(visit.start_time),
-        totime: formatTime(visit.end_time),
-      });
-    });
-
-    setDoctors(Object.values(groupedDoctors));
+    groupDoctors(filtered);
   };
 
   return (
