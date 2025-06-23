@@ -3,24 +3,33 @@ import SingleProduct from "../../shared-components/SingleProduct/SingleProduct";
 import { Product } from "../Home/Productssec/Products";
 import { apiRequests } from "../../api/api_requests.js";
 import noProductImage from "../../assets/no_product.png";
+import CustomLoader from "../../shared-components/CustomLoader/CustomLoader";
 
 const Products = () => {
   const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchProductsData = async () => {
-      const response = await apiRequests.getAllProducts();
+      setLoading(true);
+      try {
+        const response = await apiRequests.getAllProducts();
 
-      const transformedData: Product[] = response.map((item: any) => ({
-        id: item.id,
-        title: item.name,
-        desc: item.description,
-        img: item.image_url,
-        basePrice: parseFloat(item.mrp_price),
-        currentPrice: parseFloat(item.price),
-      }));
+        const transformedData: Product[] = response.map((item: any) => ({
+          id: item.id,
+          title: item.name,
+          desc: item.description,
+          img: item.image_url,
+          basePrice: parseFloat(item.mrp_price),
+          currentPrice: parseFloat(item.price),
+        }));
 
-      setProducts(transformedData);
+        setProducts(transformedData);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchProductsData();
@@ -32,10 +41,17 @@ const Products = () => {
         <h2 className="mb-0 py-3 py-md-5 page-title">Products</h2>
 
         <div className="row py-3 py-md-5">
-          {products.length > 0 ? (
+          {loading ? (
+            <div
+              className="d-flex justify-content-center align-items-center w-100"
+              style={{ minHeight: "200px" }}
+            >
+              <CustomLoader />
+            </div>
+          ) : products.length > 0 ? (
             products.map((product: Product) => (
               <div
-                className="col-12 col-sm-12 col-md-6 col-lg-4 mb-3 mb-md-4"
+                className="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 mb-3 mb-md-4"
                 key={product.id}
               >
                 <SingleProduct

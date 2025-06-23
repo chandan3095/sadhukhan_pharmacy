@@ -5,6 +5,7 @@ import SingleDoctor from "../../shared-components/SingleDoctor/SingleDoctor";
 import { useEffect, useState } from "react";
 import { apiRequests } from "../../api/api_requests";
 import noDataImage from "../../assets/no_doctor.png";
+import CustomLoader from "../../shared-components/CustomLoader/CustomLoader";
 
 const Doctors = () => {
   const options: Option[] = [
@@ -19,14 +20,23 @@ const Doctors = () => {
   ];
 
   const [doctors, setDoctors] = useState<any[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     fetchDoctors();
   }, []);
 
   const fetchDoctors = async () => {
-    const visitingDays = await apiRequests.getAllVisitingDays();
-    groupDoctors(visitingDays);
+    setLoading(true);
+    try {
+      const visitingDays = await apiRequests.getAllVisitingDays();
+      groupDoctors(visitingDays);
+    } catch (error) {
+      console.error("Error fetching doctors:", error);
+      setDoctors([]);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const groupDoctors = (data: any[]) => {
@@ -69,18 +79,24 @@ const Doctors = () => {
   };
 
   const handleDropdownChange = async (value: string | null) => {
-    const visitingDays = await apiRequests.getAllVisitingDays();
+    setLoading(true);
+    try {
+      const visitingDays = await apiRequests.getAllVisitingDays();
 
-    if (!value || value === "all") {
-      groupDoctors(visitingDays);
-      return;
+      if (!value || value === "all") {
+        groupDoctors(visitingDays);
+      } else {
+        const filtered = visitingDays.filter(
+          (visit: any) => visit.day.toLowerCase() === value.toLowerCase()
+        );
+        groupDoctors(filtered);
+      }
+    } catch (error) {
+      console.error("Error filtering doctors:", error);
+      setDoctors([]);
+    } finally {
+      setLoading(false);
     }
-
-    const filtered = visitingDays.filter(
-      (visit: any) => visit.day.toLowerCase() === value.toLowerCase()
-    );
-
-    groupDoctors(filtered);
   };
 
   return (
@@ -96,7 +112,14 @@ const Doctors = () => {
         </div>
 
         <div className="row py-3 py-md-5">
-          {doctors.length > 0 ? (
+          {loading ? (
+            <div
+              className="d-flex justify-content-center align-items-center w-100"
+              style={{ minHeight: "200px" }}
+            >
+              <CustomLoader />
+            </div>
+          ) : doctors.length > 0 ? (
             doctors.map((doctor: any) => (
               <div
                 className="col-12 col-sm-12 col-md-6 col-lg-4 mb-3 mb-md-4"

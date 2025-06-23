@@ -1,5 +1,6 @@
 /* Make all cards have equal height */
 .equal-height-card {
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -23,7 +24,7 @@
 }
 
 .card-img-top {
-  max-height: 220px;
+  max-height: 290px;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }

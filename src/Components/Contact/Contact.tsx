@@ -41,7 +41,7 @@ const Contact = () => {
     } catch (err) {
       toast.error("Failed to send message. Please try again.");
     } finally {
-      setLoading(false); // ✅ hide loading
+      setLoading(false);
     }
   };
 
@@ -62,7 +62,7 @@ const Contact = () => {
             <IoMailOutline /> sadhukhanpharmacy.med@gmail.com
           </p>
           <p className="footer-text">
-            <IoCallOutline /> 7866065406
+            <IoCallOutline /> 7866065406 / 8350089864
           </p>
         </div>
 

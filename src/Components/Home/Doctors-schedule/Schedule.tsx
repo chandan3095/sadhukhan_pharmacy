@@ -8,6 +8,7 @@ import { Row } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { apiRequests } from "../../../api/api_requests";
 import { useNavigate } from "react-router-dom";
+import CustomLoader from "../../../shared-components/CustomLoader/CustomLoader";
 
 const Schedule = () => {
   const settings = {
@@ -60,35 +61,43 @@ const Schedule = () => {
   };
   const navigate = useNavigate();
   const [doctors, setDoctors] = useState<any[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchDoctors = async () => {
-      const visitingDays = await apiRequests.getAllVisitingDays();
+      setLoading(true);
+      try {
+        const visitingDays = await apiRequests.getAllVisitingDays();
 
-      const groupedDoctors: { [doctorId: number]: any } = {};
+        const groupedDoctors: { [doctorId: number]: any } = {};
 
-      visitingDays.forEach((visit: any) => {
-        const doctorId = visit.doctor.id;
+        visitingDays.forEach((visit: any) => {
+          const doctorId = visit.doctor.id;
 
-        if (!groupedDoctors[doctorId]) {
-          groupedDoctors[doctorId] = {
-            id: doctorId,
-            name: visit.doctor.name,
-            degree: visit.doctor.degree,
-            specialist: visit.doctor.specialist,
-            profile_picture_url: visit.doctor.profile_picture_url,
-            schedules: [],
-          };
-        }
+          if (!groupedDoctors[doctorId]) {
+            groupedDoctors[doctorId] = {
+              id: doctorId,
+              name: visit.doctor.name,
+              degree: visit.doctor.degree,
+              specialist: visit.doctor.specialist,
+              profile_picture_url: visit.doctor.profile_picture_url,
+              schedules: [],
+            };
+          }
 
-        groupedDoctors[doctorId].schedules.push({
-          day: visit.day,
-          fromtime: formatTime(visit.start_time),
-          totime: formatTime(visit.end_time),
+          groupedDoctors[doctorId].schedules.push({
+            day: visit.day,
+            fromtime: formatTime(visit.start_time),
+            totime: formatTime(visit.end_time),
+          });
         });
-      });
 
-      setDoctors(Object.values(groupedDoctors));
+        setDoctors(Object.values(groupedDoctors));
+      } catch (error) {
+        console.error("Error fetching doctors:", error);
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchDoctors();
@@ -127,7 +136,14 @@ const Schedule = () => {
 
         <Row>
           <div className="slider-container pt-3 pt-md-5">
-            {doctors.length === 1 ? (
+            {loading ? (
+              <div
+                className="d-flex justify-content-center align-items-center w-100"
+                style={{ minHeight: "200px" }}
+              >
+                <CustomLoader />
+              </div>
+            ) : doctors.length === 1 ? (
               <div className="d-flex justify-content-center">
                 <SingleDoctor
                   id={doctors[0].id}

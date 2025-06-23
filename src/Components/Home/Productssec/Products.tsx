@@ -5,6 +5,7 @@ import SingleProduct from "../../../shared-components/SingleProduct/SingleProduc
 import { useEffect, useState } from "react";
 import { apiRequests } from "../../../api/api_requests";
 import { useNavigate } from "react-router-dom";
+import CustomLoader from "../../../shared-components/CustomLoader/CustomLoader";
 
 export interface Product {
   id: number;
@@ -18,21 +19,29 @@ export interface Product {
 const Products = () => {
   const navigate = useNavigate();
   const [products, setProducts] = useState<any[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchProductsData = async () => {
-      const response = await apiRequests.getAllProducts();
+      setLoading(true);
+      try {
+        const response = await apiRequests.getAllProducts();
 
-      const transformedData: Product[] = response.map((item: any) => ({
-        id: item.id,
-        title: item.name,
-        desc: item.description,
-        img: item.image_url,
-        basePrice: parseFloat(item.mrp_price),
-        currentPrice: parseFloat(item.price),
-      }));
+        const transformedData: Product[] = response.map((item: any) => ({
+          id: item.id,
+          title: item.name,
+          desc: item.description,
+          img: item.image_url,
+          basePrice: parseFloat(item.mrp_price),
+          currentPrice: parseFloat(item.price),
+        }));
 
-      setProducts(transformedData);
+        setProducts(transformedData);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchProductsData();
@@ -57,22 +66,30 @@ const Products = () => {
       </div>
 
       <div className="row pt-3 pt-md-5">
-        {products.slice(0, 6).map((item: Product) => (
+        {loading ? (
           <div
-            className="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 d-flex justify-content-center mb-4"
-            key={item.id}
+            className="d-flex justify-content-center align-items-center w-100"
+            style={{ minHeight: "200px" }}
           >
-            <SingleProduct
-              key={item.id}
-              id={item.id}
-              title={item.title}
-              basePrice={item.basePrice}
-              currentPrice={item.currentPrice}
-              desc={item.desc}
-              img={item.img}
-            />
+            <CustomLoader />
           </div>
-        ))}
+        ) : (
+          products.slice(0, 6).map((item: Product) => (
+            <div
+              className="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 d-flex justify-content-center mb-4"
+              key={item.id}
+            >
+              <SingleProduct
+                id={item.id}
+                title={item.title}
+                basePrice={item.basePrice}
+                currentPrice={item.currentPrice}
+                desc={item.desc}
+                img={item.img}
+              />
+            </div>
+          ))
+        )}
       </div>
     </div>
   );
