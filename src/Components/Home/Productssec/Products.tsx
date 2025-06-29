@@ -74,7 +74,7 @@ const Products = () => {
             <CustomLoader />
           </div>
         ) : (
-          products.slice(0, 6).map((item: Product) => (
+          products.slice(0, 8).map((item: Product) => (
             <div
               className="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 d-flex justify-content-center mb-4"
               key={item.id}
