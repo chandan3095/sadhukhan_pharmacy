@@ -1,9 +1,8 @@
 import Slider, { Settings } from "react-slick";
 import "./hero.css";
-// import CustomButton from "../../../shared-components/Button/CustomButton";
-// import { GiMedicines } from "react-icons/gi";
 import img1 from "../../../assets/hero.png";
 import img2 from "../../../assets/hero2.jpeg";
+import img3 from "../../../assets/hero3.jpeg";
 import { BiSolidOffer } from "react-icons/bi";
 import { useEffect, useState } from "react";
 import { apiRequests } from "../../../api/api_requests";
@@ -72,7 +71,7 @@ const Hero = () => {
                   </div>
                 </div>
               ))
-            : [img1, img2].map((img, index) => (
+            : [img1, img2, img3].map((img, index) => (
                 <div className="slide-item" key={index}>
                   <div className="image-overlay"></div>
                   <img

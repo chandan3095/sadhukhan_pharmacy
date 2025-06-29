@@ -5,3 +5,10 @@
   word-break: break-word;
   line-height: 1.7;
 }
+
+.about-slide-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  object-fit: cover;
+}

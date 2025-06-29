@@ -7,6 +7,7 @@ interface Schedule {
   day: string;
   fromtime: string;
   totime: string;
+  description?: string;
 }
 
 interface SingleDoctorProps {
@@ -16,6 +17,7 @@ interface SingleDoctorProps {
   specialist: string;
   image?: string;
   schedules: Schedule[];
+  description?: string;
 }
 
 const SingleDoctor: React.FC<SingleDoctorProps> = ({
@@ -25,6 +27,7 @@ const SingleDoctor: React.FC<SingleDoctorProps> = ({
   specialist,
   image,
   schedules,
+  description,
 }) => {
   const [imageError, setImageError] = useState(false);
 
@@ -54,9 +57,16 @@ const SingleDoctor: React.FC<SingleDoctorProps> = ({
           <div className="schedule-list text-center">
             {Array.isArray(schedules) &&
               schedules.map((slot, index) => (
-                <Card.Text key={index} className="m-0 text-muted">
-                  {slot.day}: {slot.fromtime} - {slot.totime}
-                </Card.Text>
+                <div key={index}>
+                  <Card.Text className="m-0 text-muted">
+                    {slot.day}: {slot.fromtime} - {slot.totime}
+                  </Card.Text>
+                  {slot.description && (
+                    <Card.Text className="mt-1 text-muted">
+                      {slot.description}
+                    </Card.Text>
+                  )}
+                </div>
               ))}
           </div>
         </Card.Body>

@@ -60,6 +60,7 @@ const Doctors = () => {
         day: visit.day,
         fromtime: formatTime(visit.start_time),
         totime: formatTime(visit.end_time),
+        description: visit.description,
       });
     });
 
@@ -132,6 +133,7 @@ const Doctors = () => {
                   specialist={doctor.specialist}
                   image={doctor.profile_picture_url}
                   schedules={doctor.schedules}
+                  description={doctor.description}
                 />
               </div>
             ))

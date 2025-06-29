@@ -89,9 +89,10 @@ const Schedule = () => {
             day: visit.day,
             fromtime: formatTime(visit.start_time),
             totime: formatTime(visit.end_time),
+            description: visit.description,
           });
         });
-
+        console.log("Grouped Doctors:", groupedDoctors);
         setDoctors(Object.values(groupedDoctors));
       } catch (error) {
         console.error("Error fetching doctors:", error);
@@ -152,6 +153,7 @@ const Schedule = () => {
                   specialist={doctors[0].specialist}
                   image={doctors[0].profile_picture_url}
                   schedules={doctors[0].schedules}
+                  description={doctors[0].description}
                 />
               </div>
             ) : (
@@ -171,6 +173,7 @@ const Schedule = () => {
                       specialist={doctor.specialist}
                       image={doctor.profile_picture_url}
                       schedules={doctor.schedules}
+                      description={doctor.description}
                     />
                   </div>
                 ))}
