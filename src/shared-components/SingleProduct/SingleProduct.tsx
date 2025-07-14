@@ -6,7 +6,7 @@ const SingleProduct: React.FC<Product> = ({
   id,
   img,
   basePrice,
-  currentPrice,
+  // currentPrice,
   desc,
   title,
 }) => {
@@ -16,13 +16,16 @@ const SingleProduct: React.FC<Product> = ({
       <Card.Body>
         <Card.Title className="text-green-800 card-title">{title}</Card.Title>
         <Card.Text className="text-secondary section-text">{desc}</Card.Text>
-        <div className="d-flex justify-content-between align-items-center">
-          <Card.Title className="text-danger text-decoration-line-through card-title">
+        <div className="d-flex justify-content-between align-items-center pt-2">
+          <Card.Title className="section-text card-title">
+            M.r.p Price:
+          </Card.Title>
+          <Card.Title className="text-green-800 card-title">
             ₹{basePrice}.00
           </Card.Title>
-          <Card.Title className="text-green-700 card-title">
+          {/* <Card.Title className="text-green-700 card-title">
             ₹{currentPrice}.00
-          </Card.Title>
+          </Card.Title> */}
         </div>
       </Card.Body>
     </Card>

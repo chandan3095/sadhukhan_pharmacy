@@ -13,7 +13,7 @@ export interface Product {
   desc: string;
   img: string;
   basePrice: number;
-  currentPrice: number;
+  currentPrice?: number;
 }
 
 const Products = () => {
@@ -83,7 +83,7 @@ const Products = () => {
                 id={item.id}
                 title={item.title}
                 basePrice={item.basePrice}
-                currentPrice={item.currentPrice}
+                // currentPrice={item.currentPrice}
                 desc={item.desc}
                 img={item.img}
               />
